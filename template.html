@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Non-Editable Resume</title>
+  <style>
+    /* General Styles */
+    body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center vertically */
+  min-height: 100vh; /* Ensure the body takes up the full height of the viewport */
+}
+
+
+    /* Resume Container */
+    .resume {
+      display: flex;
+      flex-direction: row;
+      background-color: #fff;
+      width: 210mm;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      gap: 20px;
+      font-family: 'Arial', sans-serif;
+      opacity: 0;
+      animation: fadeInResume 1.5s forwards; /* Slow fade-in for the whole resume */
+    }
+
+    @keyframes fadeInResume {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    /* Left Panel */
+    .leftPanel {
+      width: 30%;
+      background-color: #080125;
+      color: white;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      text-align: center;
+      border-radius: 8px 0 0 8px;
+      animation: fadeInLeftPanel 2s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInLeftPanel {
+      0% {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .leftPanel .photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background-color: #ddd;
+      margin: 0 auto;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.3s ease;
+    }
+
+    .leftPanel .photo:hover {
+      transform: scale(1.1);
+    }
+
+    .leftPanel h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      border-bottom: 2px solid white;
+      padding-bottom: 5px;
+      transition: color 0.3s ease;
+    }
+
+    .leftPanel h3:hover {
+      color: #0a66c2;
+    }
+
+    .leftPanel p,
+    .leftPanel a {
+      color: white;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .leftPanel a {
+      text-decoration: none;
+      color: #0a66c2;
+      transition: color 0.3s ease;
+    }
+
+    .leftPanel a:hover {
+      color: #fff;
+    }
+
+    .leftPanel .skillChip {
+      background-color: #0a66c2;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 4px;
+      margin-right: 8px;
+      margin-bottom: 8px;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+
+    .leftPanel .skillChip:hover {
+      background-color: #5a5a5a;
+    }
+
+    /* Right Panel */
+    .rightPanel {
+      width: 70%;
+      padding: 20px;
+      color: #333;
+      animation: fadeInRightPanel 2s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInRightPanel {
+      0% {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .rightPanel h1 {
+      font-size: 32px;
+      color: #2b0351;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .rightPanel h2 {
+      font-size: 20px;
+      color: #777;
+      margin: 5px 0 20px;
+    }
+
+    .rightPanel h3 {
+      font-size: 20px;
+      color: #2b0351;
+      border-bottom: 3px solid #2b0351;
+      padding-bottom: 5px;
+      margin-top: 20px;
+      transition: color 0.3s ease;
+    }
+
+    .rightPanel h3:hover {
+      color: #0a66c2;
+    }
+
+    .rightPanel p,
+    .rightPanel ul {
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .rightPanel ul {
+      list-style: disc;
+      padding-left: 20px;
+    }
+
+    .rightPanel .projects ul,
+    .rightPanel .achievements ul,
+    .rightPanel .education ul {
+      margin-top: 10px;
+    }
+
+    /* Languages Section */
+    .languages ul {
+      list-style-type: disc;
+      list-style-position: inside;
+      padding-left: 0;
+      font-size: 14px;
+      color: white;
+      text-align: center;
+      margin: 0;
+      animation: fadeInLanguages 2s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInLanguages {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .languages li {
+      margin-bottom: 8px;
+    }
+
+    /* Remove Editable */
+    [contenteditable="true"] {
+      pointer-events: none;
+      user-select: none;
+      color: #333;
+      background: #f9f9f9;
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Non-Editable Resume -->
+  <div class="resume" id="editableResume">
+    <!-- Left Panel -->
+    <div class="leftPanel">
+      <div class="photo" id="photo" style="background-image: url('https://www.w3schools.com/w3images/avatar2.png');"></div>
+
+      <div class="contact">
+        <h3>Contact</h3>
+        <p>Email: <span>example@mail.com</span></p>
+        <p>Phone: <br> <span>+1234567890</span></p>
+        <p>LinkedIn: <a href="#" target="_blank">linkedin.com/in/example</a></p>
+        <p>GitHub: <a href="#" target="_blank">github.com/example</a></p>
+      </div>
+
+      <div class="skills">
+        <h3>Skills</h3>
+        <div class="skillList">
+          <span class="skillChip">JavaScript</span>
+          <span class="skillChip">React</span>
+          <span class="skillChip">CSS</span>
+          <span class="skillChip">Express js</span>
+        </div>
+      </div>
+
+      <div class="languages">
+        <h3>Languages</h3>
+        <ul class="languageList">
+          <li>English</li>
+          <li>Spanish</li>
+          <li>German</li>
+          <li>Marathi</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Right Panel -->
+    <div class="rightPanel">
+      <h1>John Doe</h1>
+      <h2>Software Developer</h2>
+      <div class="about">
+        <h3>About Me</h3>
+        <p>Experienced front-end developer as well as backend developer skilled in building modern, responsive websites. My expertise spans a wide array of technologies, from front-end frameworks like React to back-end solutions using Node.js and database management. </p>
+      </div>
+
+      <div class="workExperience">
+        <h3>Work Experience</h3>
+        <div class="job">
+          <p><strong>Software Engineer</strong> | Tech Corp</p>
+          <p>2020 - 2023</p>
+          <ul>
+            <li>Developed responsive web apps using React and Redux.</li>
+            <li>Collaborated with designers to implement UI features.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="projects">
+        <h3>Projects</h3>
+        <ul>
+          <li>
+            <strong>Portfolio Website</strong>
+            <p>A responsive website showcasing projects.</p>
+            <p><strong>Deployed Link:</strong> <a href="#" target="_blank">Website</a></p>
+            <p><strong>GitHub Link:</strong> <a href="#" target="_blank">Repo</a></p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="achievements">
+        <h3>Achievements</h3>
+        <ul>
+          <li>1st Place in Hackathon</li>
+          <li>Certified Full Stack Developer (2023)</li>
+        </ul>
+      </div>
+
+      <div class="education">
+        <h3>Education</h3>
+        <ul>
+          <li><strong>Bachelor of Science in Computer Science</strong> | XYZ University | 2020</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
